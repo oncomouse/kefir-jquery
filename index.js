@@ -15,7 +15,7 @@
         transformer = selector;
         selector = null;
       }
-      return Kefir.fromBinder(
+      return Kefir.stream(
         function(handler) {
           $el.on(eventName, selector, handler)
           return function () {$el.off(eventName, selector, handler)}
