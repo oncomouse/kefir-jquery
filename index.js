@@ -15,9 +15,11 @@
         transformer = selector;
         selector = null;
       }
-      return Kefir.fromSubUnsub(
-        function (handler) {$el.on(eventName, selector, handler)},
-        function (handler) {$el.off(eventName, selector, handler)},
+      return Kefir.fromBinder(
+        function(handler) {
+          $el.on(eventName, selector, handler)
+          return function () {$el.off(eventName, selector, handler)}
+        },
         transformer
       ).setName('asKefirStream');
     }
